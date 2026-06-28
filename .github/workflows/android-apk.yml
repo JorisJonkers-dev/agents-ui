@@ -47,11 +47,13 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: package.json
       - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
       - name: Build web app
         run: pnpm build
       - name: Add Android project

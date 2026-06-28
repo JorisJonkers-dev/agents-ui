@@ -48,11 +48,13 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: package.json
       - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
       - name: Lint
         run: pnpm lint
       - name: Typecheck
@@ -76,11 +78,13 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: package.json
       - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
       - name: Install browsers
         run: pnpm exec playwright install --with-deps
       - name: Run E2E
@@ -98,11 +102,13 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: package.json
       - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
       - name: Run Stryker
         run: pnpm stryker
 
@@ -123,11 +129,13 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          cache-dependency-path: package.json
       - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
+          pnpm install --no-frozen-lockfile
       - name: Build web app
         run: pnpm build
       - name: Add Android project
