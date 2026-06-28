@@ -1,0 +1,32 @@
+# Build output
+/build
+/dist
+/out
+/target
+/.gradle
+/node_modules
+
+# Env / secrets (never commit)
+.env
+.env.*
+!.env.example
+*.local
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Logs
+*.log
+
+# Capacitor native projects are generated in CI and local workspaces.
+/android
+/ios
+.capacitor/
+
+# Capacitor build outputs
+/coverage
+/playwright-report
+/test-results
