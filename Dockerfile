@@ -7,17 +7,13 @@ FROM node:26-alpine AS build
 # package.json instead of going through corepack's shim dance.
 RUN npm install -g pnpm@9.15.4
 WORKDIR /app
-ARG NODE_AUTH_TOKEN=
-COPY .npmrc package.json ./
+COPY .npmrc package.json pnpm-lock.yaml ./
 RUN --mount=type=secret,id=github_token \
-    set -eu; \
-    NODE_AUTH_TOKEN="${NODE_AUTH_TOKEN:-$(cat /run/secrets/github_token 2>/dev/null || true)}"; \
-    { \
-    printf '%s\n' '@jorisjonkers-dev:registry=https://npm.pkg.github.com'; \
-    printf '%s\n' "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}"; \
-    printf '%s\n' 'always-auth=true'; \
-    } > ~/.npmrc; \
-    pnpm install --no-frozen-lockfile
+    token="$(cat /run/secrets/github_token 2>/dev/null)" \
+    && test -n "$token" \
+    && printf '@jorisjonkers-dev:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n' "$token" > .npmrc \
+    && pnpm install --frozen-lockfile \
+    && printf '%s\n' '@jorisjonkers-dev:registry=https://npm.pkg.github.com' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > .npmrc
 COPY . .
 ARG VITE_AUTH_URL=https://auth.jorisjonkers.dev
 ARG VITE_FARO_URL=https://faro.jorisjonkers.dev/collect
