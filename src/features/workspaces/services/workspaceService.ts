@@ -1,3 +1,4 @@
+import type { RestartAgentSessionHttpRequest } from '@jorisjonkers-dev/agents-api-client'
 import type {
   AgentKind,
   AgentSetupReference,
@@ -13,7 +14,6 @@ import type {
   WorkspaceConnectResponse,
   WorkspaceDetail,
 } from '../types'
-import type { RestartAgentSessionHttpRequest } from '@jorisjonkers-dev/agents-api-client'
 import { ApiError, useApiWithAuth } from '@/lib/vueWebCommons'
 
 function getApi(): ReturnType<typeof useApiWithAuth> {

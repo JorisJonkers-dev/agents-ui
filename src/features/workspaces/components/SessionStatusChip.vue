@@ -5,6 +5,8 @@ import type {
   SessionStatusTone,
 } from '../stores/sessionConsoleViewModels'
 import { computed } from 'vue'
+import claudeCodeIcon from '@/assets/agents/claude-code.svg'
+import codexIcon from '@/assets/agents/codex.svg'
 
 interface Props {
   session: SessionConsoleViewModel
@@ -33,8 +35,8 @@ const shapeClass: Record<SessionStatusShape, string> = {
 }
 
 const agentIcons: Partial<Record<SessionConsoleViewModel['kind'], string>> = {
-  CLAUDE: new URL('../assets/claude-code.svg', import.meta.url).href,
-  CODEX: new URL('../assets/codex.svg', import.meta.url).href,
+  CLAUDE: claudeCodeIcon,
+  CODEX: codexIcon,
 }
 
 const label = computed(() => {

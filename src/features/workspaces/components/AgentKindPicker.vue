@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { AgentKind } from '../types'
+import claudeCodeIcon from '@/assets/agents/claude-code.svg'
+import codexIcon from '@/assets/agents/codex.svg'
 
 const props = withDefaults(defineProps<{ modelValue: AgentKind; compact?: boolean; stacked?: boolean }>(), {
   compact: false,
@@ -14,8 +16,8 @@ const options: { value: AgentKind; label: string; description: string }[] = [
 ]
 
 const agentIcons: Partial<Record<AgentKind, string>> = {
-  CLAUDE: new URL('../assets/claude-code.svg', import.meta.url).href,
-  CODEX: new URL('../assets/codex.svg', import.meta.url).href,
+  CLAUDE: claudeCodeIcon,
+  CODEX: codexIcon,
 }
 </script>
 

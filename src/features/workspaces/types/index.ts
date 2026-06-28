@@ -6,6 +6,7 @@ import type {
   AgentSetupReferenceResponse,
   AgentSetupValidationIssueResponse,
   AgentSetupValidationResponse,
+  WorkspaceConnectResponse as AgentsWorkspaceConnectResponse,
   FailedSessionSetupResponse,
   SessionSetupStateResponse,
   SetupPreviewResponse,
@@ -13,7 +14,6 @@ import type {
   SetupTargetOptionsResponse,
   SetupTransitionHistoryResponse,
   SetupTransitionResponse,
-  WorkspaceConnectResponse as AgentsWorkspaceConnectResponse,
 } from '@jorisjonkers-dev/agents-api-client'
 import type { FieldError as ApiFieldError, ProblemDetail as ApiProblemDetail } from '@/lib/vueWebCommons'
 

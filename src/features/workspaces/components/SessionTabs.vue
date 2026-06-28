@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { AgentSession } from '../types'
 import { computed, nextTick, ref, watch } from 'vue'
+import claudeCodeIcon from '@/assets/agents/claude-code.svg'
+import codexIcon from '@/assets/agents/codex.svg'
 import { useSessionLabelsStore } from '../stores/sessionLabels'
 
 interface Props {
@@ -36,8 +38,8 @@ const kindLabel: Record<AgentSession['kind'], string> = {
 }
 
 const agentIcons: Partial<Record<AgentSession['kind'], string>> = {
-  CLAUDE: new URL('../assets/claude-code.svg', import.meta.url).href,
-  CODEX: new URL('../assets/codex.svg', import.meta.url).href,
+  CLAUDE: claudeCodeIcon,
+  CODEX: codexIcon,
 }
 
 function kindBadgeClass(kind: AgentSession['kind']): string {

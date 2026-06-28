@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { CredentialProvider, CredentialStatus } from '../types'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import claudeCodeIcon from '@/assets/agents/claude-code.svg'
+import codexIcon from '@/assets/agents/codex.svg'
 import { Card, useToast } from '@/lib/vueWebCommons'
-import claudeCodeIcon from '../../workspaces/assets/claude-code.svg'
-import codexIcon from '../../workspaces/assets/codex.svg'
 import { useCredentialsStore } from '../stores/credentials'
 import { isTerminalPhase } from '../types'
 
