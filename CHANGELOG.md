@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.1](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.17.0...v0.17.1) (2026-06-29)
+
+
+### Bug Fixes
+
+* apply agents-ui program sweep ([#3](https://github.com/JorisJonkers-dev/agents-ui/issues/3)) ([dec3cbd](https://github.com/JorisJonkers-dev/agents-ui/commit/dec3cbdded59f65636a2c2ebc0eef509c6e55ac2))
+
 ## [0.17.0](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.16.0...v0.17.0) (2026-06-29)
 
 
