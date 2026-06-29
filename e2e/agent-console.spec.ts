@@ -36,6 +36,7 @@ test('workspace agent console starts agents and stages text for the active sessi
   await page.getByTestId('workspace-new-session-option-codex').click()
 
   await expect(page.getByTestId('session-tab-sess-2')).toBeVisible()
+  await openWorkspaceControls(page)
   await expect(page.getByTestId('session-status-rail-label')).toContainText('sess-2')
 
   await page.getByTestId('stage-input-open').click()
