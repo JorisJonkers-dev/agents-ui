@@ -6,6 +6,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   build: {
+    chunkSizeWarningLimit: 900,
     modulePreload: { polyfill: false },
   },
   resolve: {

@@ -105,7 +105,7 @@ describe('sessions home', () => {
   it('uses the published rail-capable commons package range', () => {
     expect(packageJson.dependencies['@jorisjonkers-dev/agents-api-client']).toBe('0.17.1')
     expect(packageJson.dependencies['@jorisjonkers-dev/auth-api-client']).toBe('0.2.1')
-    expect(packageJson.dependencies['@jorisjonkers-dev/vue-web-commons']).toBe('0.4.0')
+    expect(packageJson.dependencies['@jorisjonkers-dev/vue-web-commons']).toBe('0.4.1')
   })
 
   it('passes rail layout, nav icons, session child links, and the new session action to AppShell', () => {
