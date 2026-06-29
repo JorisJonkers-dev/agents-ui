@@ -1,5 +1,17 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 import { installAuthenticatedAppMocks } from './mocks'
+
+async function openWorkspaceControls(page: Page): Promise<void> {
+  const viewport = page.viewportSize()
+  if ((viewport?.width ?? 1280) < 1024) {
+    await page.getByTestId('workspace-sidebar-toggle').click()
+  }
+  await expect(page.getByTestId('workspace-sidebar')).toBeVisible()
+}
+
+async function expectStatusStreamState(page: Page, state: string): Promise<void> {
+  await expect(page.getByTestId('session-status-rail-running-chip')).toHaveAttribute('data-state', state)
+}
 
 test('workspace agent console opens with status stream and terminal socket mocks', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
@@ -9,7 +21,8 @@ test('workspace agent console opens with status stream and terminal socket mocks
   await expect(page.getByTestId('workspace-console')).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Demo workspace' })).toBeVisible()
   await expect(page.getByTestId('workspace-status-summary')).toContainText('Live')
-  await expect(page.getByTestId('session-status-rail-connection')).toHaveAttribute('data-state', 'open')
+  await openWorkspaceControls(page)
+  await expectStatusStreamState(page, 'open')
   await expect(page.getByTestId('session-status-rail-label')).toContainText('sess-1')
   await expect(page.getByTestId('session-terminal')).toBeVisible()
 })
@@ -42,13 +55,15 @@ test('connect-on-open readiness: READY runner enables the spawn button', async (
   await expect(page.getByTestId('workspace-new-session')).not.toContainText('Runner booting')
 })
 
-test('runner in BOOTING state disables the spawn button', async ({ page }) => {
+test('runner in BOOTING state keeps the session dropdown available', async ({ page }) => {
   await installAuthenticatedAppMocks(page, { runnerState: 'BOOTING' })
 
   await page.goto('/sessions/workspace/ws-1')
 
   await expect(page.getByTestId('workspace-console')).toBeVisible()
-  await expect(page.getByTestId('workspace-new-session')).toBeDisabled()
+  await expect(page.getByTestId('workspace-new-session')).toBeVisible()
+  await page.getByTestId('workspace-new-session').click()
+  await expect(page.getByTestId('workspace-new-session-option-claude')).toBeVisible()
 })
 
 test('workspace opens without auto-starting a session', async ({ page }) => {
@@ -68,20 +83,12 @@ test('duplicate explicit start creates only one session', async ({ page }) => {
   await page.goto('/sessions/workspace/ws-1')
   await expect(page.getByTestId('workspace-console')).toBeVisible()
 
-  // Two synchronous startSession calls via the dropdown menu; the
-  // startingSessionByKey dedup map returns the existing promise to the second
-  // caller, so only one session is created.
-  await page.evaluate(() => {
-    const btn = document.querySelector('[data-testid="workspace-new-session"]')
-    if (btn instanceof HTMLElement) btn.click()
-  })
-  await page.evaluate(() => {
-    const opt = document.querySelector('[data-testid="workspace-new-session-option-claude"]')
-    if (opt instanceof HTMLElement) {
-      opt.click()
-      opt.click()
-    }
-  })
+  // Two startSession clicks via the dropdown menu; the startingSessionByKey
+  // dedup map returns the existing promise to the second caller, so only one
+  // session is created.
+  await page.getByTestId('workspace-new-session').click()
+  await expect(page.getByTestId('workspace-new-session-option-claude')).toBeVisible()
+  await page.getByTestId('workspace-new-session-option-claude').dblclick()
 
   await expect(page.getByTestId('session-tab-sess-2')).toBeVisible()
   await expect(page.getByTestId('session-tab-sess-3')).toBeHidden()
@@ -93,7 +100,8 @@ test('native SSE reconnect: close transitions to Connecting, reopen returns to L
   await page.goto('/sessions/workspace/ws-1')
 
   await expect(page.getByTestId('workspace-status-summary')).toContainText('Live')
-  await expect(page.getByTestId('session-status-rail-connection')).toHaveAttribute('data-state', 'open')
+  await openWorkspaceControls(page)
+  await expectStatusStreamState(page, 'open')
 
   // Simulate the EventSource dropping (readyState CLOSED → onerror fires).
   // sessionStatusStream.ts maps this to onError → connectionState = 'error'.
@@ -103,7 +111,7 @@ test('native SSE reconnect: close transitions to Connecting, reopen returns to L
   })
 
   await expect(page.getByTestId('workspace-status-summary')).not.toContainText('Live')
-  await expect(page.getByTestId('session-status-rail-connection')).toHaveAttribute('data-state', 'error')
+  await expectStatusStreamState(page, 'error')
 
   // Simulate the browser's native auto-reconnect completing.
   await page.evaluate(() => {
@@ -112,7 +120,7 @@ test('native SSE reconnect: close transitions to Connecting, reopen returns to L
   })
 
   await expect(page.getByTestId('workspace-status-summary')).toContainText('Live')
-  await expect(page.getByTestId('session-status-rail-connection')).toHaveAttribute('data-state', 'open')
+  await expectStatusStreamState(page, 'open')
 })
 
 test('post-stop refresh does not reconnect the runner', async ({ page }) => {
@@ -123,6 +131,7 @@ test('post-stop refresh does not reconnect the runner', async ({ page }) => {
   // First connect returns READY → spawn button enabled with agent kind label.
   await expect(page.getByTestId('workspace-new-session')).toBeEnabled()
   await expect(page.getByTestId('workspace-new-session')).not.toContainText('Runner booting')
+  await openWorkspaceControls(page)
 
   // Stop the active session. endSession calls open({ connectRunner: false }),
   // so no second connect request is issued.
