@@ -13,7 +13,7 @@ RUN --mount=type=secret,id=github_token \
     && test -n "$token" \
     && printf '@jorisjonkers-dev:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n' "$token" > .npmrc \
     && pnpm install --frozen-lockfile \
-    && printf '%s\n' '@jorisjonkers-dev:registry=https://npm.pkg.github.com' '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' > .npmrc
+    && printf '%s\n' '@jorisjonkers-dev:registry=https://npm.pkg.github.com' > .npmrc
 COPY . .
 ARG VITE_AUTH_URL=https://auth.jorisjonkers.dev
 ARG VITE_FARO_URL=https://faro.jorisjonkers.dev/collect

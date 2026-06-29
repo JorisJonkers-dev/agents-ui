@@ -121,7 +121,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v4
       - uses: pnpm/action-setup@v6
         with:
           version: 9.15.4
@@ -156,7 +156,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-qemu-action@v4
       - uses: docker/setup-buildx-action@v4
       - name: Build image
         uses: docker/build-push-action@v7
@@ -169,10 +169,26 @@ jobs:
           secrets: |
             github_token=${{ secrets.GITHUB_TOKEN }}
 
+  deploy-bundle:
+    name: Deploy Bundle
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-bundle.yml@v0.8.0
+    permissions:
+      contents: read
+      packages: write
+    with:
+      deploy-dir: deploy
+      images: deploy/images.lock.json
+      package-version: 0.9.0
+      version: 0.0.0-ci.${{ github.run_number }}.${{ github.run_attempt }}
+      bundle-name: agents-ui
+      publish: false
+    secrets:
+      packages-token: ${{ secrets.GITHUB_TOKEN }}
+
   pipeline-complete:
     name: Pipeline Complete
     runs-on: ubuntu-latest
-    needs: [workflow-lint, web-check, e2e, mutation, android-smoke, docker-build]
+    needs: [workflow-lint, web-check, e2e, mutation, android-smoke, docker-build, deploy-bundle]
     if: ${{ always() }}
     steps:
       - uses: re-actors/alls-green@release/v1

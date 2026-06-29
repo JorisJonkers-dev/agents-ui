@@ -7,7 +7,14 @@ describe('app', () => {
   it('renders without crashing', async () => {
     const router = createRouter({
       history: createMemoryHistory(),
-      routes: [{ path: '/', name: 'home', component: { template: '<div />' } }],
+      routes: [
+        { path: '/', name: 'home', component: { template: '<div />' } },
+        { path: '/sessions', name: 'sessions', component: { template: '<div />' } },
+        { path: '/sessions/workspace/:id', name: 'workspace-detail', component: { template: '<div />' } },
+        { path: '/projects', name: 'projects', component: { template: '<div />' } },
+        { path: '/repositories', name: 'repositories', component: { template: '<div />' } },
+        { path: '/account', name: 'account', component: { template: '<div />' } },
+      ],
     })
     await router.push('/')
     await router.isReady()

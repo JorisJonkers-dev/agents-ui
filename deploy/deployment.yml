@@ -1,0 +1,38 @@
+apiVersion: deployment.jorisjonkers.dev/v2
+kind: Deployment
+metadata:
+  name: agents-ui
+  labels:
+    app.kubernetes.io/part-of: agents
+spec:
+  services:
+    agents-ui:
+      image: ghcr.io/jorisjonkers-dev/agents-ui:${BUNDLE_VERSION}
+      namespace: agents-system
+      ports:
+        - name: http
+          containerPort: 80
+      placement:
+        nodeSelector:
+          kubernetes.io/arch: arm64
+      autoscaling:
+        minReplicas: 1
+        maxReplicas: 1
+      observability:
+        gatus:
+          - name: agents-ui
+            url: https://agents.jorisjonkers.dev/
+      routes:
+        - host: agents.jorisjonkers.dev
+          expose:
+            tier: public-frankfurt
+          rules:
+            - path: /
+              port: http
+              operation: prefix
+              auth:
+                scope: anonymous
+      safety:
+        gateOn:
+          - parity
+          - routeOrAuthChange

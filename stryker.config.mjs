@@ -3,9 +3,6 @@ const config = {
   mutate: [
     'src/**/*.ts',
     '!src/**/*.test.ts',
-    '!src/**/*.spec.ts',
-    '!src/**/generated/**',
-    '!src/**/*.d.ts',
     '!src/lib/authApi/index.ts',
     '!src/router/discovery.ts',
   ],
@@ -13,6 +10,7 @@ const config = {
   plugins: ['@stryker-mutator/vitest-runner'],
   reporters: ['html', 'clear-text', 'progress'],
   coverageAnalysis: 'perTest',
+  ignoreStatic: true,
   vitest: {
     configFile: 'vitest.config.ts',
   },
