@@ -776,7 +776,7 @@ packages:
     resolution: {integrity: sha512-WJuq5AzTpVccwQuR1xS0puueblWdmfjMtnfNbjUCqi3d3VCHAZr7PbcEfMfrq/ppNlhl0hmNpb6xb0dp93i7hg==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/auth-api-client/0.2.1/840f51722a7dee12528b597eb6c3c9a67319a6bd}
 
   '@jorisjonkers-dev/vue-web-commons@0.4.1':
-    resolution: {integrity: sha512-CItc779tLy5RmOz9Ql7jdrCtRR+p65PoFZZwSDr42lTDaZL3ASnylnSVQyYJkgpK37xyLn+9FRPVNWLJ/ROq8A==}
+    resolution: {integrity: sha512-CItc779tLy5RmOz9Ql7jdrCtRR+p65PoFZZwSDr42lTDaZL3ASnylnSVQyYJkgpK37xyLn+9FRPVNWLJ/ROq8A==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/vue-web-commons/0.4.1/0aad362b8c36b5140e314d14534b988a26ef5244}
     peerDependencies:
       '@grafana/faro-web-sdk': ^2.7.1
       '@grafana/faro-web-tracing': ^2.7.1
