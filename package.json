@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.17.0",
   "private": true,
-  "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
   "packageManager": "pnpm@9.15.4",
+  "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

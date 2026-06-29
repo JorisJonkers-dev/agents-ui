@@ -2,6 +2,7 @@
 const config = {
   mutate: [
     'src/**/*.ts',
+    '!src/**/*.test.ts',
     '!src/lib/authApi/index.ts',
     '!src/router/discovery.ts',
   ],
