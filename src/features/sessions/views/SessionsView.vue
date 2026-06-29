@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { TabPanel, Tabs } from '@/lib/vueWebCommons'
 import ChatTab from '../components/ChatTab.vue'
 import ScratchTab from '../components/ScratchTab.vue'
 import WorkspaceTab from '../components/WorkspaceTab.vue'
@@ -23,6 +22,10 @@ const active = computed<SessionTab>({
     void router.push({ path: '/sessions', query: { ...rest, tab: value } })
   },
 })
+
+function activate(value: SessionTab): void {
+  active.value = value
+}
 </script>
 
 <template>
@@ -36,15 +39,15 @@ const active = computed<SessionTab>({
       </p>
     </header>
 
-    <Tabs v-model="active" aria-label="Session flavour">
-      <template #tabs="{ active: current, activate }">
+    <div data-testid="tabs">
+      <div role="tablist" aria-label="Session flavour" class="flex gap-1 border-b border-[var(--color-surface-border)]">
         <button
           type="button"
           role="tab"
-          :aria-selected="current === 'workspace'"
+          :aria-selected="active === 'workspace'"
           class="rounded-t px-4 py-2 text-sm transition-colors"
           :class="[
-            current === 'workspace'
+            active === 'workspace'
               ? 'bg-[var(--color-surface-elevated)] text-white border-b-2 border-[var(--color-accent)]'
               : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
           ]"
@@ -56,10 +59,10 @@ const active = computed<SessionTab>({
         <button
           type="button"
           role="tab"
-          :aria-selected="current === 'scratch'"
+          :aria-selected="active === 'scratch'"
           class="rounded-t px-4 py-2 text-sm transition-colors"
           :class="[
-            current === 'scratch'
+            active === 'scratch'
               ? 'bg-[var(--color-surface-elevated)] text-white border-b-2 border-[var(--color-accent)]'
               : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
           ]"
@@ -71,10 +74,10 @@ const active = computed<SessionTab>({
         <button
           type="button"
           role="tab"
-          :aria-selected="current === 'chat'"
+          :aria-selected="active === 'chat'"
           class="rounded-t px-4 py-2 text-sm transition-colors"
           :class="[
-            current === 'chat'
+            active === 'chat'
               ? 'bg-[var(--color-surface-elevated)] text-white border-b-2 border-[var(--color-accent)]'
               : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
           ]"
@@ -83,17 +86,23 @@ const active = computed<SessionTab>({
         >
           Chat
         </button>
-      </template>
+      </div>
 
-      <TabPanel value="workspace">
+      <section v-if="active === 'workspace'" role="tabpanel" data-testid="tab-panel-workspace" class="mt-4">
         <WorkspaceTab />
-      </TabPanel>
-      <TabPanel value="scratch">
+      </section>
+      <section v-if="active === 'scratch'" role="tabpanel" data-testid="tab-panel-scratch" class="mt-4">
         <ScratchTab />
-      </TabPanel>
-      <TabPanel value="chat" :keep-alive="true">
+      </section>
+      <section
+        v-show="active === 'chat'"
+        role="tabpanel"
+        data-testid="tab-panel-chat"
+        class="mt-4"
+        :hidden="active !== 'chat'"
+      >
         <ChatTab />
-      </TabPanel>
-    </Tabs>
+      </section>
+    </div>
   </div>
 </template>
