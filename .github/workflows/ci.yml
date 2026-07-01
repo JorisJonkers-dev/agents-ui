@@ -41,10 +41,10 @@ jobs:
     uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2
     with:
       package-manager: pnpm
-      node-version: "24"
+      node-version: '24'
       lint-command: pnpm lint
       typecheck-command: pnpm typecheck
-      prettier-args: .github/workflows/ci.yml
+      prettier-args: --single-quote .github/workflows/ci.yml
       test-command: pnpm test
       package-check-command: pnpm depcruise
       build-command: pnpm build
@@ -61,7 +61,7 @@ jobs:
           version: 9.15.4
       - uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: '24'
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
       - name: Install dependencies
@@ -85,7 +85,7 @@ jobs:
           version: 9.15.4
       - uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: '24'
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
       - name: Install dependencies
@@ -105,14 +105,14 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "21"
+          java-version: '21'
       - uses: android-actions/setup-android@v4
       - uses: pnpm/action-setup@v6
         with:
           version: 9.15.4
       - uses: actions/setup-node@v6
         with:
-          node-version: "24"
+          node-version: '24'
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
       - name: Install dependencies
@@ -174,15 +174,13 @@ jobs:
     name: Pipeline Complete
     runs-on: ubuntu-latest
     needs:
-      [
-        workflow-lint,
-        web-check,
-        e2e,
-        mutation,
-        android-smoke,
-        docker-build,
-        deploy-bundle,
-      ]
+      - workflow-lint
+      - web-check
+      - e2e
+      - mutation
+      - android-smoke
+      - docker-build
+      - deploy-bundle
     if: ${{ always() }}
     steps:
       - uses: re-actors/alls-green@release/v1
