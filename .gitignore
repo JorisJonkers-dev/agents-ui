@@ -5,6 +5,7 @@
 /target
 /.gradle
 /node_modules
+/.github-workflows
 
 # Env / secrets (never commit)
 .env

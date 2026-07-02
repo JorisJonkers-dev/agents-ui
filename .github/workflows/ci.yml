@@ -37,34 +37,19 @@ jobs:
           "$ACTIONLINT" -color .github/workflows/*.yml
 
   web-check:
-    name: Web Lint, Typecheck, Test, Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 9.15.4
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-      - name: Install dependencies
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pnpm config set //npm.pkg.github.com/:_authToken "$NODE_AUTH_TOKEN"
-          pnpm install --frozen-lockfile
-      - name: Lint
-        run: pnpm lint
-      - name: Typecheck
-        run: pnpm typecheck
-      - name: Unit tests
-        run: pnpm test:coverage
-      - name: Dependency boundaries
-        run: pnpm depcruise
-      - name: Build
-        run: pnpm build
+    name: Web Check
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2
+    with:
+      package-manager: pnpm
+      node-version: '24'
+      lint-command: pnpm lint
+      typecheck-command: pnpm typecheck
+      prettier-args: --single-quote .github/workflows/ci.yml
+      test-command: pnpm test
+      package-check-command: pnpm depcruise
+      build-command: pnpm build
+    secrets:
+      packages-token: ${{ secrets.GITHUB_TOKEN }}
 
   e2e:
     name: Browser E2E
@@ -188,7 +173,14 @@ jobs:
   pipeline-complete:
     name: Pipeline Complete
     runs-on: ubuntu-latest
-    needs: [workflow-lint, web-check, e2e, mutation, android-smoke, docker-build, deploy-bundle]
+    needs:
+      - workflow-lint
+      - web-check
+      - e2e
+      - mutation
+      - android-smoke
+      - docker-build
+      - deploy-bundle
     if: ${{ always() }}
     steps:
       - uses: re-actors/alls-green@release/v1
