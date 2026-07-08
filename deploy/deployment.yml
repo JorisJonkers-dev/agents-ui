@@ -5,7 +5,7 @@ spec:
   schemaVersion: "0.16.0"
   namespace: agents-system
   platform:
-    layer: apps-core
+    layer: apps-stateless
   workloads:
     - name: agents-ui
       image: agents-ui
