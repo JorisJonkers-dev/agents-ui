@@ -195,4 +195,3 @@ jobs:
         run: npx cap sync ios
       - name: Build iOS simulator smoke
         run: xcodebuild -workspace ios/App/App.xcworkspace -scheme App -sdk iphonesimulator -configuration Release CODE_SIGNING_ALLOWED=NO build
-

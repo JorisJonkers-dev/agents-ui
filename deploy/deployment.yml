@@ -1,23 +1,38 @@
 apiVersion: deployment.jorisjonkers.dev/v2
+kind: Deployment
 metadata:
   name: agents-ui
+  labels:
+    app.kubernetes.io/part-of: agents
 spec:
-  schemaVersion: "0.16.0"
-  namespace: agents-system
-  platform:
-    layer: apps-stateless
-  workloads:
-    - name: agents-ui
-      image: agents-ui
-      health:
-        path: /
-        port: 8080
-        timeoutClass: stateless
-        mandatory: true
-      rollbackTargetRetention:
-        minimumDays: 90
-        acknowledged: true
+  services:
+    agents-ui:
+      image: ghcr.io/jorisjonkers-dev/agents-ui:${BUNDLE_VERSION}
+      namespace: agents-system
+      ports:
+        - name: http
+          containerPort: 80
+      placement:
+        nodeSelector:
+          kubernetes.io/arch: arm64
+      autoscaling:
+        minReplicas: 1
+        maxReplicas: 1
+      observability:
+        gatus:
+          - name: agents-ui
+            url: https://agents.jorisjonkers.dev/
       routes:
         - host: agents.jorisjonkers.dev
-          owner: agents-ui
-          authMode: sso
+          expose:
+            tier: public-frankfurt
+          rules:
+            - path: /
+              port: http
+              operation: prefix
+              auth:
+                scope: anonymous
+      safety:
+        gateOn:
+          - parity
+          - routeOrAuthChange
