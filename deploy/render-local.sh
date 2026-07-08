@@ -24,7 +24,7 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 FLAG_DIFF=false
 FLAG_SCORECARD_ONLY=false
 CONTEXT_DIR="${CONTEXT_DIR:-}"
-CONTEXT_REF="${CONTEXT_REF:-ghcr.io/jorisjonkers-dev/cluster-deploy-context-public@sha256:0000000000000000000000000000000000000000000000000000000000000000}"
+CONTEXT_REF="${CONTEXT_REF:-ghcr.io/jorisjonkers-dev/cluster-deploy-context-public@sha256:0423d9bcfc091f3b6e9bd6bdd91128bb0278b97e9c9de1907e6b0817c5500232}"
 OUT_DIR="${OUT_DIR:-$REPO_ROOT/out}"
 RESOLVED_VERSION=""
 # In --scorecard-only dry mode npm audit is not run; assume verified unless
