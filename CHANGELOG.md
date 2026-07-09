@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.0...v0.18.1) (2026-07-09)
+
+
+### Bug Fixes
+
+* authenticate npm install in resolve-image-lock via .npmrc userconfig ([#10](https://github.com/JorisJonkers-dev/agents-ui/issues/10)) ([5bed3f1](https://github.com/JorisJonkers-dev/agents-ui/commit/5bed3f1645be4d4a420d057162f5973196ee2af7))
+
 ## [0.18.0](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.17.1...v0.18.0) (2026-07-09)
 
 
