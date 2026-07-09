@@ -1,7 +1,7 @@
 {
   "name": "@jorisjonkers-dev/agents-ui",
   "type": "module",
-  "version": "0.18.6",
+  "version": "0.18.7",
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
