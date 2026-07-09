@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.8](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.7...v0.18.8) (2026-07-09)
+
+
+### Bug Fixes
+
+* add kind: Deployment to deployment.yml ([#24](https://github.com/JorisJonkers-dev/agents-ui/issues/24)) ([b2f5fe3](https://github.com/JorisJonkers-dev/agents-ui/commit/b2f5fe326b0efe23a8abbadec47f7dd2cffe63cb))
+
 ## [0.18.7](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.6...v0.18.7) (2026-07-09)
 
 
