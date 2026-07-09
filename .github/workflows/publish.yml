@@ -109,7 +109,7 @@ jobs:
       artifact-name: agents-ui
       artifact-version: ${{ github.ref_name }}
       schema-version: 0.16.0
-      context-ref: ghcr.io/jorisjonkers-dev/cluster-deploy-context-public@sha256:0423d9bcfc091f3b6e9bd6bdd91128bb0278b97e9c9de1907e6b0817c5500232
+      context-ref: ghcr.io/jorisjonkers-dev/cluster-deploy-context-public@sha256:d656ddd8c44e02d6c5087118d7f3d5805183a67ce952ee592448762b908548d9
       deploy-dir: platform
       image-lock-artifact: ${{ needs.resolve-image-lock.outputs.images-lock-artifact }}
       environments: production
