@@ -61,39 +61,35 @@ jobs:
           fi
           echo "image-digest=$digest" >> "$GITHUB_OUTPUT"
 
-      - name: install-schema
-        # NODE_AUTH_TOKEN alone is not consumed by `npm install --global --registry`.
-        # Write a .npmrc that maps the @jorisjonkers-dev scope to GHCR npm and injects
-        # the token, then install with --userconfig so the global install authenticates.
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
-        run: |
-          NPMRC="$(mktemp -d)/.npmrc"
-          printf '%s\n' \
-            '@jorisjonkers-dev:registry=https://npm.pkg.github.com' \
-            "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" \
-            > "$NPMRC"
-          npm install --global \
-            --userconfig "$NPMRC" \
-            "@jorisjonkers-dev/deploy-config-schema@0.16.0"
-
       - name: lock-image
-        # Pins the exact digest from publish-image into images.lock.json.
+        # deploy-config-schema@0.16.0 has no top-level 'images' subcommand.
+        # Write the object-form images.lock.json directly; the schema CLI and
+        # deploy-artifact action consume it as a plain JSON file.
         env:
           IMAGE_DIGEST: ${{ steps.digest.outputs.image-digest }}
         run: |
-          deploy-config-schema images lock \
-            --deployment platform/deployment.yml \
-            --image-key 'agents-ui' \
-            --image "ghcr.io/jorisjonkers-dev/agents-ui@${IMAGE_DIGEST}" \
-            --out platform/images.lock.json
+          set -euo pipefail
+          if [ -z "$IMAGE_DIGEST" ] || [ "$IMAGE_DIGEST" = "null" ]; then
+            echo "E_FLOATING_IMAGE: IMAGE_DIGEST is empty" >&2
+            exit 1
+          fi
+          case "$IMAGE_DIGEST" in
+            sha256:*) ;;
+            *) echo "E_FLOATING_IMAGE: IMAGE_DIGEST is not a digest ref (got: $IMAGE_DIGEST)" >&2; exit 1 ;;
+          esac
+          printf '{"agents-ui":"ghcr.io/jorisjonkers-dev/agents-ui@%s"}\n' "$IMAGE_DIGEST" \
+            > platform/images.lock.json
+          echo "Locked image: ghcr.io/jorisjonkers-dev/agents-ui@${IMAGE_DIGEST}"
 
       - name: verify-lock
+        # Guard: confirm images.lock.json is well-formed and digest-pinned.
         run: |
-          deploy-config-schema images verify-lock \
-            --deployment platform/deployment.yml \
-            --images platform/images.lock.json \
-            --require-digests
+          set -euo pipefail
+          lock_ref=$(jq -r '.["agents-ui"]' platform/images.lock.json)
+          case "$lock_ref" in
+            *@sha256:*) echo "Digest pin verified: $lock_ref" ;;
+            *) echo "E_FLOATING_IMAGE: lock ref is not digest-pinned: $lock_ref" >&2; exit 1 ;;
+          esac
 
       - name: upload-image-lock
         uses: actions/upload-artifact@v5
