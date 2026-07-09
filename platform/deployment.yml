@@ -1,0 +1,23 @@
+apiVersion: deployment.jorisjonkers.dev/v2
+metadata:
+  name: agents-ui
+spec:
+  schemaVersion: 0.16.0
+  namespace: agents-system
+  platform:
+    layer: apps-stateless
+  workloads:
+    - name: agents-ui
+      image: agents-ui
+      health:
+        path: /
+        port: 8080
+        timeoutClass: stateless
+        mandatory: true
+      rollbackTargetRetention:
+        minimumDays: 90
+        acknowledged: true
+      routes:
+        - host: agents.jorisjonkers.dev
+          owner: agents-ui
+          authMode: sso
