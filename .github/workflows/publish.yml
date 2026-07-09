@@ -62,11 +62,20 @@ jobs:
           echo "image-digest=$digest" >> "$GITHUB_OUTPUT"
 
       - name: install-schema
-        run: |
-          npm install --global "@jorisjonkers-dev/deploy-config-schema@0.16.0" \
-            --registry https://npm.pkg.github.com
+        # NODE_AUTH_TOKEN alone is not consumed by `npm install --global --registry`.
+        # Write a .npmrc that maps the @jorisjonkers-dev scope to GHCR npm and injects
+        # the token, then install with --userconfig so the global install authenticates.
         env:
           NODE_AUTH_TOKEN: ${{ github.token }}
+        run: |
+          NPMRC="$(mktemp -d)/.npmrc"
+          printf '%s\n' \
+            '@jorisjonkers-dev:registry=https://npm.pkg.github.com' \
+            "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" \
+            > "$NPMRC"
+          npm install --global \
+            --userconfig "$NPMRC" \
+            "@jorisjonkers-dev/deploy-config-schema@0.16.0"
 
       - name: lock-image
         # Pins the exact digest from publish-image into images.lock.json.
