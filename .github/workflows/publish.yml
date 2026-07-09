@@ -21,7 +21,7 @@ jobs:
   # Reusable workflow: consume its results via needs.<job>.outputs downstream;
   # a `uses:` job must not redeclare an outputs: block.
   publish-image:
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@v0.11.1
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/container-publish.yml@cd2f537acb93336394ca3d0ca382daf498ab41f2 # v0.11.2
     with:
       image-name: agents-ui
       version: ${{ github.ref_name }}
@@ -103,7 +103,7 @@ jobs:
   # image-lock-artifact is the ONLY lock input passed across the boundary.
   publish-deploy-artifact:
     needs: [resolve-image-lock]
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-artifact.yml@v0.11.1
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-artifact.yml@cd2f537acb93336394ca3d0ca382daf498ab41f2 # v0.11.2
     with:
       ref: ${{ github.ref }}
       artifact-name: agents-ui
