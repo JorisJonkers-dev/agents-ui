@@ -14,7 +14,7 @@ permissions: {}
 
 jobs:
   deploy-preview:
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-validate.yml@94b01fa6661e7e465440fa0a47188eaa3f5b3841 # v0.11.7
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-validate.yml@dc006b080a75b734fe1970b7dbd54b9d34b1f19d # v0.11.8
     with:
       deploy-dir: platform
       schema-version: 0.16.0
