@@ -1,4 +1,5 @@
 apiVersion: deployment.jorisjonkers.dev/v2
+kind: Deployment
 metadata:
   name: agents-ui
 spec:
