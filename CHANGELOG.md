@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.9](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.8...v0.18.9) (2026-07-09)
+
+
+### Bug Fixes
+
+* bump github-workflows to v0.11.6 ([#26](https://github.com/JorisJonkers-dev/agents-ui/issues/26)) ([e29ecdf](https://github.com/JorisJonkers-dev/agents-ui/commit/e29ecdf33548d382ff3f8c2b1f33ba70bb3888f2))
+
 ## [0.18.8](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.7...v0.18.8) (2026-07-09)
 
 
