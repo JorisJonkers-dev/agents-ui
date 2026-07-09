@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.6](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.5...v0.18.6) (2026-07-09)
+
+
+### Bug Fixes
+
+* update context-public digest to current schema-compatible version ([#20](https://github.com/JorisJonkers-dev/agents-ui/issues/20)) ([3870d45](https://github.com/JorisJonkers-dev/agents-ui/commit/3870d45913092bb43d5a9e57a125b07c34fd65b2))
+
 ## [0.18.5](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.4...v0.18.5) (2026-07-09)
 
 
