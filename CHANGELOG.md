@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.2](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.1...v0.18.2) (2026-07-09)
+
+
+### Bug Fixes
+
+* replace deploy-config-schema images commands with shell equivalents ([#12](https://github.com/JorisJonkers-dev/agents-ui/issues/12)) ([ead53e6](https://github.com/JorisJonkers-dev/agents-ui/commit/ead53e67b0b64c73f3ea25f5a8589523e6e45277))
+
 ## [0.18.1](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.0...v0.18.1) (2026-07-09)
 
 
