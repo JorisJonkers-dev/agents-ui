@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.17.1...v0.18.0) (2026-07-09)
+
+
+### Features
+
+* adopt platform deploy pipeline ([#8](https://github.com/JorisJonkers-dev/agents-ui/issues/8)) ([f2b11c2](https://github.com/JorisJonkers-dev/agents-ui/commit/f2b11c264081afd5d18dbaf1763e89ae67d59534))
+
 ## [0.17.1](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.17.0...v0.17.1) (2026-06-29)
 
 
