@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.16](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.15...v0.18.16) (2026-07-10)
+
+
+### Bug Fixes
+
+* **publish:** update context-ref to latest cluster public context digest ([63dd13c](https://github.com/JorisJonkers-dev/agents-ui/commit/63dd13cab086fe250e3d022ab3e0eecf4b2aeaa8))
+
 ## [0.18.15](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.14...v0.18.15) (2026-07-09)
 
 
