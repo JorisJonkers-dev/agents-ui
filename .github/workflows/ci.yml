@@ -38,7 +38,7 @@ jobs:
 
   web-check:
     name: Web Check
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2
+    uses: JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.14.1
     with:
       package-manager: pnpm
       node-version: '24'
