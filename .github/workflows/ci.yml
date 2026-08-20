@@ -154,22 +154,6 @@ jobs:
           secrets: |
             github_token=${{ secrets.GITHUB_TOKEN }}
 
-  deploy-bundle:
-    name: Deploy Bundle
-    uses: JorisJonkers-dev/github-workflows/.github/workflows/deploy-bundle.yml@v0.8.1
-    permissions:
-      contents: read
-      packages: write
-    with:
-      deploy-dir: deploy
-      images: deploy/images.lock.json
-      package-version: 0.9.0
-      version: 0.0.0-ci.${{ github.run_number }}.${{ github.run_attempt }}
-      bundle-name: agents-ui
-      publish: false
-    secrets:
-      packages-token: ${{ secrets.GITHUB_TOKEN }}
-
   pipeline-complete:
     name: Pipeline Complete
     runs-on: ubuntu-latest
@@ -180,7 +164,6 @@ jobs:
       - mutation
       - android-smoke
       - docker-build
-      - deploy-bundle
     if: ${{ always() }}
     steps:
       - uses: re-actors/alls-green@release/v1
