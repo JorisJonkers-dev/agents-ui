@@ -1,6 +1,6 @@
 # Deploy Preview for deploy-platform service repos.
 #
-# Any PR touching deploy/ gets a full render + validation and a sticky
+# Any PR touching platform/ gets a full render + validation and a sticky
 # "Deploy Preview" comment with the SC-11 readiness scorecard. The reusable
 # deploy-validate.yml workflow owns the gate-summary emission and the comment.
 name: Deploy Preview
@@ -8,7 +8,7 @@ name: Deploy Preview
 on:
   pull_request:
     paths:
-      - 'deploy/**'
+      - 'platform/**'
 
 permissions: {}
 
