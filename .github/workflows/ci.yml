@@ -23,6 +23,7 @@ jobs:
   workflow-lint:
     name: Workflow Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - name: Download actionlint
@@ -54,6 +55,7 @@ jobs:
   e2e:
     name: Browser E2E
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v6
@@ -78,6 +80,7 @@ jobs:
   mutation:
     name: Mutation Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v6
@@ -100,6 +103,7 @@ jobs:
   android-smoke:
     name: Android Smoke
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-java@v5
@@ -139,6 +143,7 @@ jobs:
   docker-build:
     name: Docker Build
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - uses: docker/setup-qemu-action@v4
@@ -157,6 +162,7 @@ jobs:
   pipeline-complete:
     name: Pipeline Complete
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs:
       - workflow-lint
       - web-check
