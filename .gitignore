@@ -48,3 +48,6 @@ scratchpads/
 .agents/skills/speckit*/
 templates/**/.specify/
 templates/**/.claude/commands/speckit*.md
+
+# Stryker mutation reports and incremental state
+reports/
