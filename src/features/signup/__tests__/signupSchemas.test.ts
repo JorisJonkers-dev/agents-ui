@@ -1,3 +1,4 @@
+import type { z } from 'zod'
 import { describe, expect, it } from 'vitest'
 import {
   forgotPasswordRequestSchema,
@@ -21,12 +22,12 @@ function registration(overrides: Record<string, unknown> = {}): Record<string, u
   }
 }
 
-function messageFor(schema: { safeParse: (v: unknown) => unknown }, value: unknown, field: string) {
-  const result = schema.safeParse(value) as
-    | { success: true }
-    | { success: false; error: { issues: { path: (string | number)[]; message: string }[] } }
+function messageFor(schema: z.ZodType, value: unknown, field: string): string | undefined {
+  // Typed as a zod schema rather than asserted: safeParse returns a
+  // discriminated union, so narrowing on success needs no cast.
+  const result = schema.safeParse(value)
   if (result.success) return undefined
-  return result.error.issues.find((i) => i.path.includes(field))?.message
+  return result.error.issues.find((issue) => issue.path.includes(field))?.message
 }
 
 describe('registerUserRequestSchema', () => {
