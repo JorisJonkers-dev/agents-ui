@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.18.18](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.17...v0.18.18) (2026-08-27)
+
+
+### Bug Fixes
+
+* **ci:** watch platform/ so deploy-preview can run again ([#54](https://github.com/JorisJonkers-dev/agents-ui/issues/54)) ([7bdb8ed](https://github.com/JorisJonkers-dev/agents-ui/commit/7bdb8ed40cf1c87f656482c91250bfb5a9ed61ee))
+* **platform:** make render-local.sh able to run ([#48](https://github.com/JorisJonkers-dev/agents-ui/issues/48)) ([f64b88b](https://github.com/JorisJonkers-dev/agents-ui/commit/f64b88b2ad59477b644c3d4c82f857f48fbfd7a2))
+
 ## [0.18.17](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.16...v0.18.17) (2026-08-19)
 
 
