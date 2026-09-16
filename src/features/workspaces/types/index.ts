@@ -17,7 +17,7 @@ import type {
 } from '@jorisjonkers-dev/agents-api-client'
 import type { FieldError as ApiFieldError, ProblemDetail as ApiProblemDetail } from '@/lib/vueWebCommons'
 
-export type WorkspaceStatus = 'PENDING' | 'STARTING' | 'READY' | 'IDLE' | 'FAILED' | 'DESTROYED'
+export type WorkspaceStatus = 'PREPARING' | 'READY' | 'FAILED' | 'DESTROYED'
 
 /**
  * Workspace flavour. The shape PR E introduced so the redesigned UI
@@ -62,6 +62,8 @@ export interface Workspace {
   podName: string | null
   gatewayEndpoint: string | null
   status: WorkspaceStatus
+  /** Set only once `status` is `FAILED`; null/undefined otherwise, including while still PREPARING. */
+  failureReason?: string | null
   kind: WorkspaceKind
   projectId: string | null
   repositoryId: string | null
