@@ -43,7 +43,7 @@ function onSubmit(): void {
 <template>
   <div class="space-y-4" data-testid="workspace-repository-picker">
     <p class="text-sm text-[var(--color-text-muted)]">
-      Attach an existing repository to this workspace. It will be cloned into /workspace by repository name on the next
+      Add an existing repository to this workspace. It will be cloned into /workspace by repository name on the next
       runner start using GitHub App access.
       <RouterLink to="/repositories" class="text-[var(--color-accent-light)] underline">Add a repository</RouterLink>
       first if it is missing.
@@ -54,7 +54,7 @@ function onSubmit(): void {
     </div>
 
     <p v-else-if="candidates.length === 0" class="text-sm text-[var(--color-text-muted)] italic">
-      Every repository is already attached to this workspace, or you have not created any yet.
+      Every repository is already added to this workspace, or you have not created any yet.
     </p>
 
     <ul v-else class="max-h-72 space-y-2 overflow-y-auto">
@@ -96,7 +96,7 @@ function onSubmit(): void {
         data-testid="repository-picker-submit"
         @click="onSubmit"
       >
-        {{ pending ? 'Attaching...' : 'Attach repository' }}
+        {{ pending ? 'Adding...' : 'Add repository' }}
       </button>
     </div>
   </div>

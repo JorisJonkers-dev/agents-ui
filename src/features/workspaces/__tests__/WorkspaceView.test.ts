@@ -820,7 +820,7 @@ describe('workspaceView terminal persistence', () => {
     const wrapper = await mountView()
 
     expect(wrapper.find('[data-testid="split-follow-up"]').text()).toContain(
-      'Keep owner/split-dest attached here, or open a new workspace from that repository.',
+      'Keep owner/split-dest added to this workspace, or open a new workspace from that repository.',
     )
   })
 
