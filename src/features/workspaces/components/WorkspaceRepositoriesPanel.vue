@@ -50,8 +50,8 @@ const sortedRepositories = computed(() =>
           </h2>
         </div>
         <p v-if="!collapsed" class="mt-1 text-xs text-[var(--color-text-muted)]">
-          Attached repositories are cloned under /workspace by repository name using GitHub App access. The primary
-          repository drives defaults.
+          Repositories added to this workspace are cloned under /workspace by repository name using GitHub App
+          access. The primary repository drives defaults.
         </p>
       </div>
       <button
@@ -61,7 +61,7 @@ const sortedRepositories = computed(() =>
         data-testid="workspace-add-repository"
         @click="emit('add')"
       >
-        {{ attachPending ? 'Attaching...' : 'Attach' }}
+        {{ attachPending ? 'Adding...' : 'Add repository' }}
       </button>
     </div>
 
@@ -71,7 +71,7 @@ const sortedRepositories = computed(() =>
       </p>
 
       <p v-if="sortedRepositories.length === 0" class="text-sm text-[var(--color-text-muted)] italic">
-        No repositories attached.
+        No repositories added.
       </p>
 
       <ul v-else class="space-y-3" data-testid="workspace-repositories-list">

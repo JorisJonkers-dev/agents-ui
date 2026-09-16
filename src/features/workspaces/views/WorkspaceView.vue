@@ -314,10 +314,10 @@ async function onAttachRepository(repositoryId: string): Promise<void> {
   try {
     await store.attachRepository(repositoryId)
     showRepositoryPicker.value = false
-    toast.success('Repository attached')
+    toast.success('Repository added')
   } catch (e) {
-    repositoryActionError.value = 'Could not attach the repository'
-    toast.errorFromCatch('Could not attach the repository', e)
+    repositoryActionError.value = 'Could not add the repository'
+    toast.errorFromCatch('Could not add the repository', e)
   } finally {
     isAttachingRepository.value = false
   }
@@ -588,7 +588,7 @@ async function onDetachRepository(repositoryId: string, repositoryName: string):
       </aside>
     </main>
 
-    <Modal :open="showRepositoryPicker" title="Attach repository" @close="showRepositoryPicker = false">
+    <Modal :open="showRepositoryPicker" title="Add repository" @close="showRepositoryPicker = false">
       <WorkspaceRepositoryPicker
         :already-attached="store.activeWorkspace?.repositories ?? []"
         :pending="isAttachingRepository"

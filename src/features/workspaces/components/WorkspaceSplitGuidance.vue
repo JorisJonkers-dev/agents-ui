@@ -97,12 +97,12 @@ function repositorySlug(repository: WorkspaceRepository): string {
       </p>
 
       <p v-if="!primaryRepository" class="mt-3 text-sm text-[var(--color-text-muted)] italic">
-        Attach a primary repository before preparing a split.
+        Add a primary repository before preparing a split.
       </p>
 
       <div v-else-if="destinationRepositories.length === 0" class="mt-3 space-y-3">
         <p class="text-sm text-[var(--color-text-muted)] italic">
-          Attach a destination repository to build a split command.
+          Add a destination repository to build a split command.
         </p>
         <button
           type="button"
@@ -110,7 +110,7 @@ function repositorySlug(repository: WorkspaceRepository): string {
           data-testid="split-attach-destination"
           @click="emit('addDestination')"
         >
-          Attach destination repository
+          Add destination repository
         </button>
       </div>
 
@@ -157,7 +157,9 @@ function repositorySlug(repository: WorkspaceRepository): string {
           <li v-if="inProject">
             Keep {{ destinationSlug }} linked in the project repository pool before opening follow-up workspaces.
           </li>
-          <li v-else>Keep {{ destinationSlug }} attached here, or open a new workspace from that repository.</li>
+          <li v-else>
+            Keep {{ destinationSlug }} added to this workspace, or open a new workspace from that repository.
+          </li>
           <li>Start the next runner from {{ destinationSlug }} after the split lands.</li>
         </ol>
       </div>
