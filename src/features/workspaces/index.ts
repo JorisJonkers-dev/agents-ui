@@ -2,6 +2,7 @@
 // import via this barrel rather than reaching into types/stores
 // directly — dependency-cruiser's `no-cross-feature-deep-import`
 // rule enforces it.
+export { default as WorkspaceStatusBadge } from './components/WorkspaceStatusBadge.vue'
 export { useWorkspacesStore } from './stores/workspaces'
 export type {
   AgentKind,

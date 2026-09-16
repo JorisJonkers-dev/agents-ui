@@ -106,7 +106,7 @@ function fakeWorkspace(over: Partial<Workspace> = {}): Workspace {
     branch: 'trunk',
     podName: null,
     gatewayEndpoint: null,
-    status: 'PENDING',
+    status: 'PREPARING',
     kind: 'REPO_BACKED',
     projectId: 'project-1',
     repositoryId: 'repo-primary',
