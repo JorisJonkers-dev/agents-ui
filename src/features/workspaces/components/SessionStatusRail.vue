@@ -60,7 +60,7 @@ const statusChip = computed<{ tone: 'running' | 'connected'; label: string } | n
   return null
 })
 const railLabel = computed(() => {
-  if (!props.session) return 'No active session status'
+  if (!props.session) return 'No active agent session status'
   return [
     `${props.session.label}: ${props.session.affordance.ariaLabel}`,
     props.session.kindLabel,
@@ -104,8 +104,8 @@ function formatTimestamp(value: string | null): string {
           "
           :data-testid="`session-status-rail-${statusChip.tone}-chip`"
           :data-state="connectionState"
-          :aria-label="statusChip.tone === 'running' ? 'Session is running' : connectionLabel"
-          :title="statusChip.tone === 'running' ? 'Session is running' : connectionLabel"
+          :aria-label="statusChip.tone === 'running' ? 'Agent session is running' : connectionLabel"
+          :title="statusChip.tone === 'running' ? 'Agent session is running' : connectionLabel"
         >
           <span class="block size-2 rounded-full bg-current" aria-hidden="true" />
           <span>{{ statusChip.label }}</span>
@@ -113,7 +113,7 @@ function formatTimestamp(value: string | null): string {
       </div>
     </div>
     <p v-else class="min-h-8 text-sm text-[var(--color-text-muted)]" data-testid="session-status-rail-empty">
-      No active session.
+      No active agent session.
     </p>
 
     <dl class="grid grid-cols-2 gap-2 text-xs">

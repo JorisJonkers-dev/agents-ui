@@ -138,15 +138,15 @@ const canRestartActive = computed(() => {
 })
 const canStopActive = computed(() => activeSession.value?.status === 'RUNNING')
 const activeEmptyTitle = computed(() => {
-  if (!activeSession.value) return 'No active session'
-  if (activeSession.value.status === 'FAILED') return 'Session failed'
-  if (activeSession.value.status === 'STOPPED') return 'Session stopped'
+  if (!activeSession.value) return 'No active agent session'
+  if (activeSession.value.status === 'FAILED') return 'Agent session failed'
+  if (activeSession.value.status === 'STOPPED') return 'Agent session stopped'
   return 'Terminal unavailable'
 })
 const activeEmptyCopy = computed(() => {
   if (!activeSession.value) return 'Start an agent to open a terminal.'
-  if (activeSession.value.status === 'FAILED') return 'Restart the session or start a new agent.'
-  if (activeSession.value.status === 'STOPPED') return 'Restart this session or switch to a live one.'
+  if (activeSession.value.status === 'FAILED') return 'Restart the agent session or start a new agent.'
+  if (activeSession.value.status === 'STOPPED') return 'Restart this agent session or switch to a live one.'
   return 'Waiting for the runner to attach.'
 })
 
@@ -211,7 +211,7 @@ async function onSpawn(kind: AgentKind = 'CLAUDE'): Promise<void> {
   try {
     await store.newSession(kind)
   } catch (e) {
-    toast.errorFromCatch('Could not start session', e)
+    toast.errorFromCatch('Could not start agent session', e)
   }
   statuses.syncRestSessions()
   await focusConsoleSurface()
@@ -248,7 +248,7 @@ async function onConfirmRestart(): Promise<void> {
     statuses.syncRestSessions()
     toast.success(restarted ? 'Restart requested' : 'Restart state refreshed')
   } catch (e) {
-    toast.errorFromCatch('Could not restart session', e)
+    toast.errorFromCatch('Could not restart agent session', e)
   } finally {
     await focusConsoleSurface()
   }
@@ -416,7 +416,7 @@ async function onDetachRepository(repositoryId: string, repositoryName: string):
           v-if="store.activeWorkspace && !isFullscreen"
           class="flex min-w-0 shrink-0 items-stretch bg-[var(--color-surface-dark)] pr-2"
           data-testid="workspace-tabs"
-          aria-label="Sessions"
+          aria-label="Agent sessions"
         >
           <div class="flex min-w-0 items-stretch">
             <SessionTabs
@@ -526,7 +526,7 @@ async function onDetachRepository(repositoryId: string, repositoryName: string):
             data-testid="workspace-restart-confirmation"
           >
             <p class="text-amber-100" data-testid="workspace-restart-confirmation-copy">
-              Restart this session and reattach the terminal?
+              Restart this agent session and reattach the terminal?
             </p>
             <div class="flex flex-wrap gap-2">
               <button
@@ -554,7 +554,7 @@ async function onDetachRepository(repositoryId: string, repositoryName: string):
           >
             <h2 class="text-sm font-semibold">Tools</h2>
             <p id="stage-input-hint" class="sr-only">
-              Stage text is available when the active session is running.
+              Stage text is available when the active agent session is running.
             </p>
             <button
               type="button"

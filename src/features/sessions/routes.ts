@@ -4,20 +4,20 @@ export default {
   feature: 'sessions',
   routes: [
     {
-      path: '/sessions',
-      name: 'sessions',
-      component: () => import('@/features/sessions/views/SessionsView.vue'),
+      path: '/conversations',
+      name: 'conversations',
+      component: () => import('@/features/sessions/views/ConversationsView.vue'),
       meta: { requiresAuth: true },
     },
   ],
   navigation: [
     {
-      id: 'sessions',
-      label: 'Sessions',
-      to: { name: 'sessions' },
+      id: 'conversations',
+      label: 'Conversations',
+      to: { name: 'conversations' },
       section: 'main',
-      order: 10,
-      icon: 'terminal',
+      order: 11,
+      icon: 'chat',
       requiresAuth: true,
     },
   ],

@@ -50,7 +50,7 @@ function statusAffordance(session: AgentSession): SessionStatusAffordance {
   if (session.status === 'STARTING') {
     return {
       text: 'Starting',
-      ariaLabel: 'Session is starting',
+      ariaLabel: 'Agent session is starting',
       description: 'Runner is starting',
       icon: 'loader',
       shape: 'ring',
@@ -60,7 +60,7 @@ function statusAffordance(session: AgentSession): SessionStatusAffordance {
   if (session.status === 'RUNNING' && session.idle) {
     return {
       text: 'Idle',
-      ariaLabel: 'Session is running but idle',
+      ariaLabel: 'Agent session is running but idle',
       description: 'Runner is waiting for an agent binding',
       icon: 'pause',
       shape: 'ring',
@@ -70,7 +70,7 @@ function statusAffordance(session: AgentSession): SessionStatusAffordance {
   if (session.status === 'RUNNING') {
     return {
       text: 'Running',
-      ariaLabel: 'Session is running',
+      ariaLabel: 'Agent session is running',
       description: 'Terminal is available',
       icon: 'play',
       shape: 'dot',
@@ -80,8 +80,8 @@ function statusAffordance(session: AgentSession): SessionStatusAffordance {
   if (session.status === 'FAILED') {
     return {
       text: 'Failed',
-      ariaLabel: 'Session failed',
-      description: 'Session ended with an error',
+      ariaLabel: 'Agent session failed',
+      description: 'Agent session ended with an error',
       icon: 'triangle-alert',
       shape: 'diamond',
       tone: 'danger',
@@ -89,8 +89,8 @@ function statusAffordance(session: AgentSession): SessionStatusAffordance {
   }
   return {
     text: 'Stopped',
-    ariaLabel: 'Session stopped',
-    description: 'Session has ended',
+    ariaLabel: 'Agent session stopped',
+    description: 'Agent session has ended',
     icon: 'square',
     shape: 'square',
     tone: 'neutral',

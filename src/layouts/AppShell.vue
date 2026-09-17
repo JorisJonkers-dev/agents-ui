@@ -17,10 +17,13 @@ const auth = hasAuthApi
       logout: async () => undefined,
     }
 
-const sessionChildren: AppShellNavItem[] = [
-  { label: 'Workspace', to: '/sessions?tab=workspace', testid: 'nav-sessions-workspace', icon: 'window' },
-  { label: 'Scratch', to: '/sessions?tab=scratch', testid: 'nav-sessions-scratch', icon: 'terminal' },
-  { label: 'Chat', to: '/sessions?tab=chat', testid: 'nav-sessions-chat', icon: 'chat' },
+// Both Scratch and Repo-backed Workspaces live under the Workspaces nav item
+// (agents-api#68): the glossary treats both as Workspace sub-kinds, not
+// separate top-level concepts. Conversations has no sub-kinds, so it gets
+// no children.
+const workspaceChildren: AppShellNavItem[] = [
+  { label: 'Repo-backed', to: '/workspaces?tab=repo-backed', testid: 'nav-workspaces-repo-backed', icon: 'window' },
+  { label: 'Scratch', to: '/workspaces?tab=scratch', testid: 'nav-workspaces-scratch', icon: 'terminal' },
 ]
 
 const routePathsByName = new Map(
@@ -50,7 +53,7 @@ function toAppShellNavItem(item: NavigationItem): AppShellNavItem {
   }
 
   if (item.icon !== undefined) navItem.icon = item.icon
-  if (item.id === 'sessions') navItem.children = sessionChildren
+  if (item.id === 'workspaces') navItem.children = workspaceChildren
 
   return navItem
 }
@@ -74,16 +77,13 @@ function flattenRoutes(routes: typeof routeManifest.routes): typeof routeManifes
 
 const legacyNavItems: AppShellNavItem[] = [
   {
-    label: 'Sessions',
-    to: '/sessions',
-    testid: 'nav-sessions',
-    icon: 'terminal',
-    children: [
-      { label: 'Workspace', to: '/sessions?tab=workspace', testid: 'nav-sessions-workspace', icon: 'window' },
-      { label: 'Scratch', to: '/sessions?tab=scratch', testid: 'nav-sessions-scratch', icon: 'terminal' },
-      { label: 'Chat', to: '/sessions?tab=chat', testid: 'nav-sessions-chat', icon: 'chat' },
-    ],
+    label: 'Workspaces',
+    to: '/workspaces',
+    testid: 'nav-workspaces',
+    icon: 'window',
+    children: workspaceChildren,
   },
+  { label: 'Conversations', to: '/conversations', testid: 'nav-conversations', icon: 'chat' },
   { label: 'Projects', to: '/projects', testid: 'nav-projects', icon: 'folder' },
   { label: 'Repositories', to: '/repositories', testid: 'nav-repositories', icon: 'git' },
 ]
@@ -93,8 +93,8 @@ const legacyNavItems: AppShellNavItem[] = [
   <CommonsAppShell
     brand-main="agents"
     layout="rail"
-    new-action-label="New session"
-    new-action-to="/sessions?tab=workspace&new=1"
+    new-action-label="New workspace"
+    new-action-to="/workspaces?new=1"
     :nav-items="hasAuthApi ? navItems : legacyNavItems"
     :theme-options="agentsThemeOptions"
   >

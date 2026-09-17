@@ -31,7 +31,7 @@ function fakeSession(over: Partial<RailSession> = {}): RailSession {
     generation: 4,
     affordance: {
       text: 'Running',
-      ariaLabel: 'Session is running',
+      ariaLabel: 'Agent session is running',
       description: 'Terminal is available',
       icon: 'play',
       shape: 'dot',
@@ -48,7 +48,7 @@ describe('sessionStatusRail', () => {
     })
 
     expect(wrapper.get('[data-testid="session-status-rail"]').attributes('aria-label')).toContain(
-      'backend: Session is running',
+      'backend: Agent session is running',
     )
     expect(wrapper.get('[data-testid="session-status-rail-label"]').text()).toBe('backend')
     expect(wrapper.get('[data-testid="session-status-rail-kind"]').text()).toBe('Codex')

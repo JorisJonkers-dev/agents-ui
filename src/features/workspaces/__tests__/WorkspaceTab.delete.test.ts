@@ -88,7 +88,7 @@ function repoBackedWorkspace(id: string, name: string): Workspace {
   }
 }
 
-async function mountTab(path = '/sessions') {
+async function mountTab(path = '/workspaces') {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [{ path: '/:pathMatch(.*)*', component: { template: '<div />' } }],
@@ -144,11 +144,11 @@ describe('workspace tab delete', () => {
     store.loadAll = vi.fn().mockResolvedValue(undefined)
     store.workspaces = []
 
-    const { router, wrapper } = await mountTab('/sessions?tab=workspace&new=1')
+    const { router, wrapper } = await mountTab('/workspaces?new=1')
     await flushPromises()
 
     expect(wrapper.find('[data-testid="modal"]').exists()).toBe(true)
     expect(wrapper.getComponent({ name: 'CreateWorkspaceWizard' }).props('open')).toBe(true)
-    expect(router.currentRoute.value.query).toEqual({ tab: 'workspace' })
+    expect(router.currentRoute.value.query).toEqual({})
   })
 })

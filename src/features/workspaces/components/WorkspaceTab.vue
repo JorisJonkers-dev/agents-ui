@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useWorkspacesStore, WorkspaceStatusBadge } from '@/features/workspaces'
 import { Card, Modal, SubmitButton, useMutationState, useToast } from '@/lib/vueWebCommons'
+import { useWorkspacesStore } from '../stores/workspaces'
 import CreateWorkspaceWizard from './CreateWorkspaceWizard.vue'
+import WorkspaceStatusBadge from './WorkspaceStatusBadge.vue'
 
 const store = useWorkspacesStore()
 const toast = useToast()
@@ -74,7 +75,7 @@ async function onDestroy(id: string, name: string): Promise<void> {
 
     <ul v-else class="grid gap-3 sm:grid-cols-2" data-testid="workspace-list">
       <li v-for="w in repoBackedWorkspaces" :key="w.id">
-        <Card :to="`/sessions/workspace/${w.id}`" :data-testid="`workspace-${w.id}`">
+        <Card :to="`/workspaces/${w.id}`" :data-testid="`workspace-${w.id}`">
           <template #header>
             <div class="flex items-start justify-between">
               <span class="font-semibold">{{ w.name }}</span>
