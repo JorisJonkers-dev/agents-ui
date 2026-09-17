@@ -149,7 +149,7 @@ function repositorySlug(repository: WorkspaceRepository): string {
           data-testid="split-send-command"
           @click="emit('sendCommand', splitCommand)"
         >
-          {{ sendPending ? 'Sending...' : 'Paste command into session' }}
+          {{ sendPending ? 'Sending...' : 'Paste command into agent session' }}
         </button>
 
         <ol class="list-decimal space-y-1 pl-4 text-xs text-[var(--color-text-muted)]" data-testid="split-follow-up">

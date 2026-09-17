@@ -14,10 +14,20 @@ async function expectStatusStreamState(page: Page, state: string): Promise<void>
   await expect(page.getByTestId('session-status-rail-running-chip')).toHaveAttribute('data-state', state)
 }
 
-test('workspace agent console opens with status stream and terminal socket mocks', async ({ page }) => {
+test('the old bookmarked /sessions/workspace/:id URL still opens the workspace console', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
   await page.goto('/sessions/workspace/ws-1')
+
+  await page.waitForURL('**/workspaces/ws-1')
+  await expect(page.getByTestId('workspace-console')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Demo workspace' })).toBeVisible()
+})
+
+test('workspace agent console opens with status stream and terminal socket mocks', async ({ page }) => {
+  await installAuthenticatedAppMocks(page)
+
+  await page.goto('/workspaces/ws-1')
 
   await expect(page.getByTestId('workspace-console')).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Demo workspace' })).toBeVisible()
@@ -31,7 +41,7 @@ test('workspace agent console opens with status stream and terminal socket mocks
 test('workspace agent console starts agents and stages text for the active session', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
   await page.getByTestId('workspace-new-session').click()
   await page.getByTestId('workspace-new-session-option-codex').click()
 
@@ -49,7 +59,7 @@ test('workspace agent console starts agents and stages text for the active sessi
 test('connect-on-open readiness: READY runner enables the spawn button', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
 
   await expect(page.getByTestId('workspace-console')).toBeVisible()
   // With READY state the "+" tab button is enabled.
@@ -60,7 +70,7 @@ test('connect-on-open readiness: READY runner enables the spawn button', async (
 test('runner in BOOTING state keeps the session dropdown available', async ({ page }) => {
   await installAuthenticatedAppMocks(page, { runnerState: 'BOOTING' })
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
 
   await expect(page.getByTestId('workspace-console')).toBeVisible()
   await expect(page.getByTestId('workspace-new-session')).toBeVisible()
@@ -71,7 +81,7 @@ test('runner in BOOTING state keeps the session dropdown available', async ({ pa
 test('workspace opens without auto-starting a session', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
 
   await expect(page.getByTestId('workspace-console')).toBeVisible()
   // Only the pre-seeded sess-1 tab should exist; no session is auto-started on open.
@@ -82,7 +92,7 @@ test('workspace opens without auto-starting a session', async ({ page }) => {
 test('duplicate explicit start creates only one session', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
   await expect(page.getByTestId('workspace-console')).toBeVisible()
 
   // Two startSession clicks via the dropdown menu; the startingSessionByKey
@@ -99,7 +109,7 @@ test('duplicate explicit start creates only one session', async ({ page }) => {
 test('native SSE reconnect: close transitions to Connecting, reopen returns to Live', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
 
   await expect(page.getByTestId('workspace-status-summary')).toContainText('Live')
   await openWorkspaceControls(page)
@@ -128,7 +138,7 @@ test('native SSE reconnect: close transitions to Connecting, reopen returns to L
 test('post-stop refresh does not reconnect the runner', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
 
   // First connect returns READY → spawn button enabled with agent kind label.
   await expect(page.getByTestId('workspace-new-session')).toBeEnabled()
@@ -153,7 +163,7 @@ test('post-stop refresh does not reconnect the runner', async ({ page }) => {
 test('post-start refresh does not reconnect the runner', async ({ page }) => {
   await installAuthenticatedAppMocks(page)
 
-  await page.goto('/sessions/workspace/ws-1')
+  await page.goto('/workspaces/ws-1')
 
   // First connect returns READY.
   await expect(page.getByTestId('workspace-new-session')).toBeEnabled()

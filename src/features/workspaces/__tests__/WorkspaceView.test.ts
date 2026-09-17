@@ -495,8 +495,8 @@ describe('workspaceView terminal persistence', () => {
 
     expect(wrapper.find('[data-testid="session-tab-sess-a"]').exists()).toBe(true)
     expect(wrapper.findAll('[data-testid="session-terminal"]').length).toBe(0)
-    expect(wrapper.get('[data-testid="workspace-empty-state"]').text()).toContain('Session stopped')
-    expect(wrapper.get('[data-testid="workspace-empty-state"]').text()).toContain('Restart this session or switch to a live one.')
+    expect(wrapper.get('[data-testid="workspace-empty-state"]').text()).toContain('Agent session stopped')
+    expect(wrapper.get('[data-testid="workspace-empty-state"]').text()).toContain('Restart this agent session or switch to a live one.')
     expect(wrapper.get('[data-testid="stage-input-open"]').attributes('disabled')).toBeDefined()
   })
 
@@ -690,7 +690,7 @@ describe('workspaceView terminal persistence', () => {
     await flush()
 
     expect(stopSession).toHaveBeenCalledWith('ws-1', 'sess-new')
-    expect(wrapper.get('[data-testid="workspace-empty-state"]').text()).toContain('Session stopped')
+    expect(wrapper.get('[data-testid="workspace-empty-state"]').text()).toContain('Agent session stopped')
   })
 
   it('starts parallel sessions from the persistent tab-bar control and switches between them', async () => {
@@ -1040,7 +1040,7 @@ describe('workspaceView terminal persistence', () => {
     await new Promise((resolve) => setTimeout(resolve, 0))
     await flush()
 
-    expect(toastMock.errorFromCatch).toHaveBeenCalledWith('Could not start session', expect.any(ApiError))
+    expect(toastMock.errorFromCatch).toHaveBeenCalledWith('Could not start agent session', expect.any(ApiError))
   })
 
   it('connectWorkspace is called once on navigation and not again for internal refreshes', async () => {

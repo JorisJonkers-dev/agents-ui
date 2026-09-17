@@ -110,7 +110,7 @@ describe('useSessionConsoleViewModelsStore', () => {
 
     expect(session?.status).toBe('FAILED')
     expect(session?.canAttachTerminal).toBe(false)
-    expect(session?.affordance.ariaLabel).toBe('Session failed')
+    expect(session?.affordance.ariaLabel).toBe('Agent session failed')
   })
 
   it('labels pending setup transitions for console surfaces', () => {

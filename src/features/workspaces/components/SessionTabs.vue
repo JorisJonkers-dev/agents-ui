@@ -302,8 +302,8 @@ function sessionShellClasses(s: AgentSession): string[] {
             v-if="editingId !== s.id"
             type="button"
             class="flex size-6 shrink-0 items-center justify-center rounded text-base leading-none text-[var(--color-text-muted)] transition-colors hover:bg-red-500/10 hover:text-red-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
-            :aria-label="`Delete session ${tabLabel(s)}`"
-            :title="`Delete session ${tabLabel(s)}`"
+            :aria-label="`Delete agent session ${tabLabel(s)}`"
+            :title="`Delete agent session ${tabLabel(s)}`"
             :data-testid="`session-tab-delete-${s.id}`"
             @click.stop="emit('delete', s.id)"
             @keydown.stop

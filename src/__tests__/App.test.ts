@@ -9,8 +9,9 @@ describe('app', () => {
       history: createMemoryHistory(),
       routes: [
         { path: '/', name: 'home', component: { template: '<div />' } },
-        { path: '/sessions', name: 'sessions', component: { template: '<div />' } },
-        { path: '/sessions/workspace/:id', name: 'workspace-detail', component: { template: '<div />' } },
+        { path: '/workspaces', name: 'workspaces', component: { template: '<div />' } },
+        { path: '/workspaces/:id', name: 'workspace-detail', component: { template: '<div />' } },
+        { path: '/conversations', name: 'conversations', component: { template: '<div />' } },
         { path: '/projects', name: 'projects', component: { template: '<div />' } },
         { path: '/repositories', name: 'repositories', component: { template: '<div />' } },
         { path: '/account', name: 'account', component: { template: '<div />' } },

@@ -26,7 +26,7 @@ function fakeSession(over: Partial<SessionConsoleViewModel> = {}): SessionConsol
     setupLabel: 'No setup',
     affordance: {
       text: 'Running',
-      ariaLabel: 'Session is running',
+      ariaLabel: 'Agent session is running',
       description: 'Terminal is available',
       icon: 'play',
       shape: 'dot',
@@ -44,7 +44,7 @@ describe('sessionStatusChip', () => {
 
     expect(wrapper.get('[data-testid="session-status-chip"]').attributes('role')).toBe('status')
     expect(wrapper.get('[data-testid="session-status-chip"]').attributes('aria-label')).toBe(
-      'backend: Session is running',
+      'backend: Agent session is running',
     )
     expect(wrapper.get('[data-testid="session-status-chip"]').attributes('data-tone')).toBe('success')
     expect(wrapper.get('[data-testid="session-status-chip"]').attributes('data-shape')).toBe('dot')
@@ -61,7 +61,7 @@ describe('sessionStatusChip', () => {
           idle: true,
           affordance: {
             text: 'Idle',
-            ariaLabel: 'Session is running but idle',
+            ariaLabel: 'Agent session is running but idle',
             description: 'Runner is waiting for an agent binding',
             icon: 'pause',
             shape: 'ring',
@@ -75,7 +75,7 @@ describe('sessionStatusChip', () => {
     expect(chip.attributes('data-idle')).toBe('true')
     expect(chip.attributes('data-shape')).toBe('ring')
     expect(chip.attributes('data-icon')).toBe('pause')
-    expect(chip.attributes('aria-label')).toBe('backend: Session is running but idle: idle')
+    expect(chip.attributes('aria-label')).toBe('backend: Agent session is running but idle: idle')
     expect(chip.classes()).toContain('h-7')
     expect(chip.classes()).toContain('min-w-[6rem]')
     expect(wrapper.get('[data-testid="session-status-chip-text"]').text()).toBe('Idle')
@@ -101,7 +101,7 @@ describe('sessionStatusChip', () => {
     expect(wrapper.find('img').exists()).toBe(false)
     expect(wrapper.text()).toContain('$')
     expect(wrapper.get('[data-testid="session-status-chip"]').attributes('aria-label')).toBe(
-      'backend: Session is running',
+      'backend: Agent session is running',
     )
   })
 })

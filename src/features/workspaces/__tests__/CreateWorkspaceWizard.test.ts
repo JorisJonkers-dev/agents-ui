@@ -121,14 +121,14 @@ async function mountWizard() {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [
-      { path: '/sessions', component: { template: '<div />' } },
-      { path: '/sessions/workspace/:id', component: { template: '<div />' } },
+      { path: '/workspaces', component: { template: '<div />' } },
+      { path: '/workspaces/:id', component: { template: '<div />' } },
       { path: '/projects', component: { template: '<div />' } },
       { path: '/repositories', component: { template: '<div />' } },
       { path: '/repositories/:id', component: { template: '<div />' } },
     ],
   })
-  await router.push('/sessions')
+  await router.push('/workspaces')
   await router.isReady()
 
   const wrapper = mount(CreateWorkspaceWizard, {
@@ -194,7 +194,7 @@ describe('createWorkspaceWizard', () => {
     })
     expect(attachRepository).not.toHaveBeenCalled()
     await vi.waitFor(() => {
-      expect(router.currentRoute.value.fullPath).toBe('/sessions/workspace/ws-new')
+      expect(router.currentRoute.value.fullPath).toBe('/workspaces/ws-new')
     })
   })
 })
