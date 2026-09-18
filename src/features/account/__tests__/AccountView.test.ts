@@ -101,15 +101,14 @@ describe('accountView', () => {
     expect(wrapper.get('[data-testid="account-email"]').text()).toBe('ada@example.test')
   })
 
-  it('shows the credential login cards on the Credentials tab', async () => {
+  // agents-api#64 moved Agent Login onto the home volume: the user signs in from
+  // the terminal in an Agent Session and the CLI owns its own credential, so
+  // there is nothing for an account page to capture or display.
+  it('has no credentials tab', async () => {
     const wrapper = await mountView()
 
+    expect(wrapper.find('[data-testid="account-tab-credentials"]').exists()).toBe(false)
     expect(wrapper.find('[data-testid="credentials-card-claude"]').exists()).toBe(false)
-
-    await wrapper.get('[data-testid="account-tab-credentials"]').trigger('click')
-
-    expect(wrapper.find('[data-testid="credentials-card-claude"]').exists()).toBe(true)
-    expect(wrapper.find('[data-testid="credentials-card-codex"]').exists()).toBe(true)
   })
 
   it('submits profile edits', async () => {

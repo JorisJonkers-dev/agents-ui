@@ -3,6 +3,7 @@ import type { RestartSessionState } from '../stores/workspaces'
 import type { AgentKind } from '../types'
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { AgentLoginHint, useAgentLoginsStore } from '@/features/agentLogins'
 import { Modal, useToast } from '@/lib/vueWebCommons'
 import NewSessionTabDropdown from '../components/NewSessionTabDropdown.vue'
 import SessionStatusRail from '../components/SessionStatusRail.vue'
@@ -22,6 +23,7 @@ const store = useWorkspacesStore()
 const statuses = useSessionStatusesStore()
 const runnerStatuses = useWorkspaceRunnerStatusesStore()
 const consoleViewModels = useSessionConsoleViewModelsStore()
+const agentLogins = useAgentLoginsStore()
 const toast = useToast()
 
 const workspaceId = computed(() => String(route.params.id))
@@ -103,6 +105,15 @@ const activeRailSession = computed(() => {
     generation: session?.generation ?? null,
   }
 })
+// Presence drives a hint only. A missing Agent Login never blocks a session:
+// the CLI's own prompt in this terminal is the only place one can be created
+// (ADR 0002).
+const activeLoginPresent = computed(() => {
+  const kind = String(activeSession.value?.kind ?? '').toLowerCase()
+  if (kind !== 'claude' && kind !== 'codex') return true
+  return agentLogins.isPresent(kind)
+})
+
 const activeSessionIsLive = computed(() =>
   Boolean(activeSession.value && liveSessions.value.some((s) => s.id === activeSession.value?.id)),
 )
@@ -152,6 +163,11 @@ const activeEmptyCopy = computed(() => {
 
 watch(workspaceId, (id) => {
   void openWorkspace(id)
+  // Not in onMounted: RouterView reuses this component across /workspaces/:id,
+  // so onMounted fires once and a transient failure on that first read would
+  // suppress the hint for every workspace visited afterwards. ensureLoaded is a
+  // no-op once a read has succeeded.
+  void agentLogins.ensureLoaded()
 }, { immediate: true })
 
 watch(activeRestartState, async (state) => {
@@ -438,6 +454,14 @@ async function onDetachRepository(repositoryId: string, repositoryName: string):
           class="console-surface flex min-h-0 flex-1 flex-col overflow-hidden bg-[#0b0e14]"
           data-testid="workspace-hero-terminal"
         >
+          <AgentLoginHint
+            v-if="activeSessionIsLive && store.activeWorkspace && activeSession"
+            :session-id="activeSession.id"
+            :agent-kind="activeSession.kind"
+            :workspace-kind="store.activeWorkspace.kind"
+            :pod-name="store.activeWorkspace.podName"
+            :login-present="activeLoginPresent"
+          />
           <!-- One terminal per live session, all kept mounted; v-show keeps tab buffers while switching. -->
           <SessionTerminal
             v-for="s in liveSessions"

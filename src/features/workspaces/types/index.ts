@@ -26,8 +26,10 @@ export type WorkspaceStatus = 'PREPARING' | 'READY' | 'FAILED' | 'DESTROYED'
  *
  * - `REPO_BACKED`: Pod boots, clones `repoUrl` / `branch` through the
  *   GitHub App installation. The default.
- * - `SCRATCH`: Pod boots without a clone. The agent has a shell + the
- *   CLIs but no working tree.
+ * - `SCRATCH`: no clone, and since agents-api#62/#64 no Pod either — the
+ *   Agent Session runs inside the agents-api container, where the home
+ *   volume holding the Agent Login is mounted. Rows created before that
+ *   move can still carry a `podName`; that is what distinguishes them.
  * - `CHAT`: no Pod at all. The "workspace" is purely a placeholder so
  *   sessions can reference it; chat traffic flows through
  *   `chat_sessions` separately.

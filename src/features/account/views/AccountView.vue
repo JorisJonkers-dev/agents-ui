@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { z } from 'zod'
-import { CredentialsPanel } from '@/features/credentials'
 import { FormErrors, FormField, SubmitButton, useFormErrors, useMutationState, useToast } from '@/lib/vueWebCommons'
 import { useAccountStore } from '../stores/account'
 import { changePasswordRequestSchema, totpVerifyRequestSchema, updateProfileRequestSchema } from '../types'
@@ -9,7 +8,7 @@ import { changePasswordRequestSchema, totpVerifyRequestSchema, updateProfileRequ
 const store = useAccountStore()
 const toast = useToast()
 
-const activeTab = ref<'profile' | 'credentials'>('profile')
+const activeTab = ref<'profile'>('profile')
 
 const profileForm = reactive({
   firstName: '',
@@ -213,19 +212,6 @@ function validationErrors(error: z.ZodError): Record<string, string> {
         @click="activeTab = 'profile'"
       >
         Profile
-      </button>
-      <button
-        type="button"
-        role="tab"
-        :aria-selected="activeTab === 'credentials'"
-        class="-mb-px border-b-2 px-3 py-2 text-sm font-medium"
-        :class="activeTab === 'credentials'
-          ? 'border-[var(--color-accent)] text-[var(--color-text)]'
-          : 'border-transparent text-[var(--color-text-muted)]'"
-        data-testid="account-tab-credentials"
-        @click="activeTab = 'credentials'"
-      >
-        Credentials
       </button>
     </nav>
 
@@ -463,7 +449,5 @@ function validationErrors(error: z.ZodError): Record<string, string> {
       </section>
     </div>
     </div>
-
-    <CredentialsPanel v-if="activeTab === 'credentials'" />
-  </div>
+</div>
 </template>
