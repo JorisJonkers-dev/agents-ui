@@ -36,8 +36,8 @@ importers:
         specifier: ^2.7.1
         version: 2.8.0
       '@jorisjonkers-dev/agents-api-client':
-        specifier: 0.17.1
-        version: 0.17.1
+        specifier: 0.19.2
+        version: 0.19.2
       '@jorisjonkers-dev/auth-api-client':
         specifier: 0.2.1
         version: 0.2.1
@@ -769,8 +769,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@jorisjonkers-dev/agents-api-client@0.17.1':
-    resolution: {integrity: sha512-ghGIifMDHTklQPvbBSpr2YEccjEb+OV+eFMhY82G60Di29noR2BPwdDE1daFw+z08WgYfsInOLwuqpyjOT++Kg==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/agents-api-client/0.17.1/ef5d1c2a3e749d56af0232e5d0b9d16836140fdb}
+  '@jorisjonkers-dev/agents-api-client@0.19.2':
+    resolution: {integrity: sha512-DMH0l+fcATkklQTbi8QGr/R+XfI5sRBpiwy1Gy0REPdHWtT2ErMYEg8iEtm2gUM388YlOis31hrOdrfrk5Gbuw==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/agents-api-client/0.19.2/927f95037c45bf5346bf2911c3688cb1cd4b434a}
 
   '@jorisjonkers-dev/auth-api-client@0.2.1':
     resolution: {integrity: sha512-WJuq5AzTpVccwQuR1xS0puueblWdmfjMtnfNbjUCqi3d3VCHAZr7PbcEfMfrq/ppNlhl0hmNpb6xb0dp93i7hg==, tarball: https://npm.pkg.github.com/download/@jorisjonkers-dev/auth-api-client/0.2.1/840f51722a7dee12528b597eb6c3c9a67319a6bd}
@@ -1442,6 +1442,7 @@ packages:
   '@xmldom/xmldom@0.9.10':
     resolution: {integrity: sha512-A9gOqLdi6cV4ibazAjcQufGj0B1y/vDqYrcuP6d/6x8P27gRS8643Dj9o1dEKtB6O7fwxb2FgBmJS2mX7gpvdw==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xterm/addon-fit@0.11.0':
     resolution: {integrity: sha512-jYcgT6xtVYhnhgxh3QgYDnnNMYTcf8ElbxxFzX0IZo+vabQqSPAjC3c1wJrKB5E19VwQei89QCiZZP86DCPF7g==}
@@ -4471,7 +4472,7 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  '@jorisjonkers-dev/agents-api-client@0.17.1':
+  '@jorisjonkers-dev/agents-api-client@0.19.2':
     dependencies:
       zod: 4.4.3
 
