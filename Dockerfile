@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:26-alpine AS build
+FROM node:26.9.0-alpine AS build
 # Node 25's alpine image dropped corepack from the base layer but still
 # ships /usr/local/bin/yarn, which makes `npm install -g corepack` fail
 # with EEXIST. Install pnpm directly at the packageManager version in
