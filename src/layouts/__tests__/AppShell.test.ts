@@ -35,7 +35,7 @@ vi.mock('@/lib/vueWebCommons', async () => {
 describe('appShell navigation (agents-api#68: Workspaces / Conversations split)', () => {
   it('uses the published rail-capable commons package range', () => {
     expect(packageJson.dependencies['@jorisjonkers-dev/agents-api-client']).toBe('0.19.2')
-    expect(packageJson.dependencies['@jorisjonkers-dev/auth-api-client']).toBe('0.8.0')
+    expect(packageJson.dependencies['@jorisjonkers-dev/auth-api-client']).toBe('0.9.0')
     expect(packageJson.dependencies['@jorisjonkers-dev/vue-web-commons']).toBe('0.4.1')
   })
 
