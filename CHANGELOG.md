@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.19.0](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.18...v0.19.0) (2026-09-21)
+
+
+### Features
+
+* **agents:** replace the credential screens with a sign-in hint ([#95](https://github.com/JorisJonkers-dev/agents-ui/issues/95)) ([5870fd2](https://github.com/JorisJonkers-dev/agents-ui/commit/5870fd247424668bac0cac524bb916a8a8d37f18))
+* **workspaces:** match WorkspaceStatus to the API and show failure reason ([#90](https://github.com/JorisJonkers-dev/agents-ui/issues/90)) ([03c2897](https://github.com/JorisJonkers-dev/agents-ui/commit/03c28973ffd6ffb4825d7f8dcaaffefc2ffd9823))
+
+
+### Bug Fixes
+
+* **workspaces:** use 'Add Repository' wording instead of 'Attach' ([#87](https://github.com/JorisJonkers-dev/agents-ui/issues/87)) ([783f3a6](https://github.com/JorisJonkers-dev/agents-ui/commit/783f3a627145a534c84ddd5109a2f7efc6e30b88))
+
 ## [0.18.18](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.17...v0.18.18) (2026-08-27)
 
 
