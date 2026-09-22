@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.19.1](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.19.0...v0.19.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([#92](https://github.com/JorisJonkers-dev/agents-ui/issues/92)) ([86bde62](https://github.com/JorisJonkers-dev/agents-ui/commit/86bde62338890a4127c54e12def1ecf327b2e988))
+* **deps:** update minor and patch dependencies ([#96](https://github.com/JorisJonkers-dev/agents-ui/issues/96)) ([7d6d05d](https://github.com/JorisJonkers-dev/agents-ui/commit/7d6d05d719c714d0dc395c52e37ada6ca5ac8374))
+
 ## [0.19.0](https://github.com/JorisJonkers-dev/agents-ui/compare/v0.18.18...v0.19.0) (2026-09-21)
 
 
