@@ -31,6 +31,8 @@
 /coverage
 /playwright-report
 /test-results
+/blob-report
+/all-blob-reports
 
 # Local planning and agent scratch artifacts
 .specify/

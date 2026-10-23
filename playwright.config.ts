@@ -5,7 +5,8 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   retries: 1,
-  reporter: 'html',
+  // CI writes one blob report per project, which one job merges into a single HTML report.
+  reporter: process.env.CI ? [['blob'], ['list']] : 'html',
   webServer: {
     command: 'pnpm dev -- --host 0.0.0.0 --port 5174',
     url: 'http://localhost:5174',
