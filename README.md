@@ -4,7 +4,7 @@
 > parked at zero replicas on 2026-09-01, when Hermes replaced them, and the
 > operator retired them on 2026-10-23. JorisJonkers-dev/fleet-infra#531 removes
 > them from the cluster. Nothing deploys from this repository any more; it is
-> kept for its history. Whether to archive it is the operator's call.
+> kept for its history. It was archived on 2026-11-02.
 
 Vue/Vite web and native shell interface for the JorisJonkers.dev agent
 platform.
